@@ -1,0 +1,33 @@
+---
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: ios interview/ios interview.xcodeproj
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: ios interview
+    opts:
+      is_expand: false
+trigger_map:
+- pattern: "*"
+  is_pull_request_allowed: true
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - select-xcode-version@2.3.0: {}
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.1.0: {}
+    - cocoapods-install@1.1.0: {}
+    - certificate-and-profile-installer@1.4.0: {}
+    - xcode-test@1.11.0:
+        title: 'Xcode: Unit Test'
+    - slack@2.1.0:
+        inputs:
+        - webhook_url: https://hooks.slack.com/services/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
+        - message: "$BITRISE_APP_TITLE - $GIT_REPOSITORY_URL"
+        - message_on_error: "$BITRISE_APP_TITLE - $GIT_REPOSITORY_URL"

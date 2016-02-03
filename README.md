@@ -1,6 +1,6 @@
 # ios-interview
+Master: [![Build Status](https://www.bitrise.io/app/c9b776a01dba146c.svg?token=OF5UcHEgov2r5e2-AcNpuQ)](https://www.bitrise.io/app/c9b776a01dba146c)
 
-Master: 
 # Steps
 ## 1. Fork this repo privately
 ## 2. Clone it to your local machine
